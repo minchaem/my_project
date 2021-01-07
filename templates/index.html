@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🖐HI-rank💚</title>
+
+    <!--    부트스트랩-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+        .content {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin-top: 40px;
+        }
+
+        p {
+            margin-top: 40px;
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .form-control {
+            margin-left: 200px;
+        }
+
+        .input-group-append {
+            margin-right: 200px;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .tbl-header {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .tbl-content {
+            height: 300px;
+            overflow-x: auto;
+            margin-top: 0px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        th {
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 12px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            text-align: left;
+            vertical-align: middle;
+            font-weight: 300;
+            font-size: 12px;
+            color: #fff;
+            border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+        }
+
+
+        /* demo styles */
+
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+        body {
+            background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+            background: linear-gradient(to right, #25c481, #25b7c4);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        section {
+            margin: 50px;
+        }
+
+
+        /* follow me template */
+        .made-with-love {
+            margin-top: 40px;
+            padding: 10px;
+            clear: left;
+            text-align: center;
+            font-size: 10px;
+            font-family: arial;
+            color: #fff;
+        }
+
+        .made-with-love i {
+            font-style: normal;
+            color: #F50057;
+            font-size: 14px;
+            position: relative;
+            top: 2px;
+        }
+
+        .made-with-love a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .made-with-love a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* for custom scrollbar for webkit browser*/
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <h1>
+        🖐HI-rank💚
+    </h1>
+    <p>
+        검색 키워드의 상위랭크에 노출된 포스팅 정보를 알려드립니다.
+    </p>
+    <p>
+        High rank에 노출된 포스팅 정보 분석을 통해 포스팅의 Quality를 높여보세요.
+    </p>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder=" 관심 키워드를 입력하세요. ex)홍대맛집, 강아지 노즈워크 장난감 "
+               aria-label="Recipient's username"
+               aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">검색</button>
+        </div>
+    </div>
+    <section>
+        <!--for demo wrap-->
+        <h2></h2>
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                    <th>순서</th>
+                    <th>분류</th>
+                    <th>글제목</th>
+                    <th>게시일</th>
+                    <th>일일 방문자수</th>
+                    <th>글자수</th>
+                    <th>사진수</th>
+                    <th>키워드 반복수</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>블로그</td>
+                    <td>홍대맛집은 역시</td>
+                    <td>2021.01.01</td>
+                    <td>1,000</td>
+                    <td>2,000</td>
+                    <td>20</td>
+                    <td>15</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- follow me template -->
+    <div class="made-with-love">
+        Made with
+        <i>♥</i> by
+        <a target="_blank" href="https://codepen.io/nikhil8krishnan">Nikhil Krishnan</a>
+    </div>
+</div>
+</body>
+</html>
