@@ -135,7 +135,36 @@
         }
     </style>
     <script>
+        function showReview() {
+            // 1. 리뷰 목록을 서버에 요청하기
+            $.ajax({
+                type: "GET",
+                url: "/my_project",
+                data: {},
+                success: function (response) {
+                    let orders = response['orders'];
+                    for(let i = 0; i < orders.length; i++) {
+                        let rank = orders[i]['rank'];
+                        let name = orders[i]['name'];
+                        let date = orders[i]['date'];
+                        let url = orders[i]['url'];
+                        let type = orders[i]['type'];
+                        let total_image = orders[i]['total_image'];
+                        let total_keyword = orders[i]['total_keyword'];
+                        let total_text = orders[i]['total_text'];
 
+            let tempHtml = `<tr>
+                                <td>${rank}</td>
+                                <td>${name}</td>
+                                <td>${date}</td>
+                                <td>${url}</td>
+                                <td>${type}</td>
+                                <td>${total_image}</td>
+                                <td>${total_keyword}</td>
+                                <td>${total_text}</td>
+                            </tr>`
+            $("#rank-box").append(tempHtml);
+        }
     </script>
 </head>
 <body>
@@ -179,17 +208,7 @@
         </div>
         <div class="tbl-content">
             <table cellpadding="0" cellspacing="0" border="0">
-                <tbody>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
+                <tbody id="rank-box">
                 </tbody>
             </table>
         </div>
