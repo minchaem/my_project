@@ -2,6 +2,8 @@ import requests
 from flask import Flask, render_template, jsonify, request
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
+import pandas as pd
+from time import gmtime, strftime
 
 app = Flask(__name__)
 client = MongoClient('localhost', 27017)
@@ -71,7 +73,13 @@ def read_keword():
             info['total_keyword'] = content.text.count(keyword)
             info['total_text'] = len(content.text)
         results.append(info)
-    return jsonify({'result': 'success', 'data': results})
+    # df = pd.DataFrame(results)
+    # print(df)
+    # now = strftime("%Y-%m-%d_%H:%M:%S", gmtime())
+    # csv_path = f'/static/{now}_{keyword}.csv'
+    # df.to_csv(f'.{csv_path}')
+    return jsonify({'result': 'success', 'data': results,})
+                    # 'csv_path': csv_path})
 
 
 if __name__ == '__main__':
