@@ -15,7 +15,7 @@ def home():
 
 
 # API 역할을 하는 부분
-@app.route('/my_project', methods=['GET'])
+@app.route('/search', methods=['GET'])
 def read_keword():
     keyword = request.args.get('keyword_give')
     headers = {
@@ -31,6 +31,8 @@ def read_keword():
         name = a_tag.text
         url = a_tag['href']
         date = li.select_one('div.total_wrap > div.total_sub > span > span > span.etc_dsc_area > span')
+        if date is None:
+            continue
         rank = li['data-cr-rank']
         print()
         print('rank', rank)
@@ -43,21 +45,18 @@ def read_keword():
             'date': date.text,
             'url': url
         }
-        results.append(info)
         if 'moment' in url:
             print('type', 'moment')
-            type = {
-                'type': 'moment'
-            }
-            results.append(type)
-            continue
+            info['type'] = 'moment'
+            info['total_image'] = '-'
+            info['total_keyword'] = '-'
+            info['total_text'] = '-'
         elif 'cafe' in url:
             print('type', 'cafe')
-            type = {
-                'type': 'cafe'
-            }
-            results.append(type)
-            continue
+            info['type'] = 'cafe'
+            info['total_image'] = '-'
+            info['total_keyword'] = '-'
+            info['total_text'] = '-'
         elif 'blog' in url:
             print('type', 'blog')
             data = requests.get(url, headers=headers)
@@ -67,13 +66,11 @@ def read_keword():
             print('total image', len(img_list))
             print('total keyword', content.text.count(keyword))
             print('total text', len(content.text))
-            blog = {
-                'type': 'blog',
-                'total_image': len(img_list),
-                'total_keyword': content.text.count(keyword),
-                'total_text': len(content.text)
-            }
-            results.append(blog)
+            info['type'] = 'blog'
+            info['total_image'] = len(img_list)
+            info['total_keyword'] = content.text.count(keyword)
+            info['total_text'] = len(content.text)
+        results.append(info)
     return jsonify({'result': 'success', 'data': results})
 
 
