@@ -51,12 +51,14 @@ def read_keword():
             print('type', 'moment')
             info['type'] = 'moment'
             info['total_image'] = '-'
+            info['total_video'] = '-'
             info['total_keyword'] = '-'
             info['total_text'] = '-'
         elif 'cafe' in url:
             print('type', 'cafe')
             info['type'] = 'cafe'
             info['total_image'] = '-'
+            info['total_video'] = '-'
             info['total_keyword'] = '-'
             info['total_text'] = '-'
         elif 'blog' in url:
@@ -65,11 +67,14 @@ def read_keword():
             soup = BeautifulSoup(data.text, 'html.parser')
             content = soup.select_one('#viewTypeSelector')
             img_list = content.select('img')
+            vid_list = content.select('.se-component.se-video.se-l-default')
             print('total image', len(img_list))
+            print('total video', len(vid_list))
             print('total keyword', content.text.count(keyword))
             print('total text', len(content.text))
             info['type'] = 'blog'
             info['total_image'] = len(img_list)
+            info['total_video'] = len(vid_list)
             info['total_keyword'] = content.text.count(keyword)
             info['total_text'] = len(content.text)
         results.append(info)
