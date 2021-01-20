@@ -6,7 +6,8 @@ import pandas as pd
 from time import gmtime, strftime
 
 app = Flask(__name__)
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@localhost',27017)
+# client = MongoClient('localhost', 27017)
 db = client.dbsparta
 
 
