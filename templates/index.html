@@ -135,6 +135,17 @@
             text-decoration: underline;
         }
 
+        #download {
+            text-align: right;
+        }
+
+        #csv-download {
+            visibility: hidden;
+            color: white;
+            font-size: 18px;
+            padding: 16px 8px;
+        }
+
         /* for custom scrollbar for webkit browser*/
         ::-webkit-scrollbar {
             width: 6px;
@@ -149,20 +160,20 @@
         }
     </style>
     <style type="text/css">
-        /*<!--로딩바스타일  -->*/
         body {
             text-align: center;
             margin: 0 auto;
         }
-
-        #Progress_Loading {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            background: #ffffff;
-        }
     </style>
     <script>
+        $(document).ready(function () {
+            $('#search-keyword').keydown(function (event) {
+                if (event.key === 'Enter') {
+                    showRank()
+                }
+            })
+        })
+
         function showLoader() {
             $('#loader-background').show()
             $('.loader').show()
@@ -190,6 +201,7 @@
                         let data = response['data'];
                         let csvPath = response['csv_path'];
                         $('#csv-download').attr('href', csvPath);
+                        $('#csv-download').css('visibility', 'visible')
                         for (let i = 0; i < data.length; i++) {
                             let rank = data[i]['rank'];
                             let name = data[i]['name'];
@@ -204,7 +216,7 @@
                                     <td>${rank}</td>
                                     <td>${name}</td>
                                     <td>${date}</td>
-                                    <td class="scroll">${url}</td>
+                                    <td class="scroll"><a href="${url}">${url}</a></td>
                                     <td>${type}</td>
                                     <td>${total_image}</td>
                                     <td>${total_video}</td>
@@ -246,7 +258,9 @@
     <section>
         <!--for demo wrap-->
         <h2></h2>
-        <a href="" id="csv-download">Download</a>
+        <div id="download">
+            <a href="" id="csv-download">Download</a>
+        </div>
         <!--        <div class="Do9">-->
         <!--            <div class="tbl-header">-->
         <!--                <table cellpadding="0" cellspacing="0" border="0">-->

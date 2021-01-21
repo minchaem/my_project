@@ -1,22 +1,18 @@
 import requests
 from flask import Flask, render_template, jsonify, request
-from pymongo import MongoClient
+# from pymongo import MongoClient
 from bs4 import BeautifulSoup
 import pandas as pd
-from time import gmtime, strftime
-
+from datetime import datetime
+from pytz import timezone
 app = Flask(__name__)
 # client = MongoClient('mongodb://test:test@localhost',27017)
-client = MongoClient('localhost', 27017)
-db = client.dbsparta
-
-
+# client = MongoClient('localhost', 27017)
+# db = client.dbsparta
 # HTML 화면 보여주기
 @app.route('/')
 def home():
     return render_template('index.html')
-
-
 # API 역할을 하는 부분
 @app.route('/search', methods=['GET'])
 def read_keword():
@@ -46,22 +42,19 @@ def read_keword():
             'rank': rank,
             'name': name,
             'date': date.text,
-            'url': url
+            'url': url,
+            'type': '-',
+            'total_image': '-',
+            'total_video': '-',
+            'total_keyword': '-',
+            'total_text': '-',
         }
         if 'moment' in url:
             print('type', 'moment')
             info['type'] = 'moment'
-            info['total_image'] = '-'
-            info['total_video'] = '-'
-            info['total_keyword'] = '-'
-            info['total_text'] = '-'
         elif 'cafe' in url:
             print('type', 'cafe')
             info['type'] = 'cafe'
-            info['total_image'] = '-'
-            info['total_video'] = '-'
-            info['total_keyword'] = '-'
-            info['total_text'] = '-'
         elif 'blog' in url:
             print('type', 'blog')
             data = requests.get(url, headers=headers)
@@ -79,14 +72,14 @@ def read_keword():
             info['total_keyword'] = content.text.count(keyword)
             info['total_text'] = len(content.text)
         results.append(info)
-    # df = pd.DataFrame(results)
-    # print(df)
-    # now = strftime("%Y-%m-%d_%H:%M:%S", gmtime())
-    # csv_path = f'/static/{now}_{keyword}.csv'
-    # df.to_csv(f'.{csv_path}')
-    return jsonify({'result': 'success', 'data': results,})
-                    # 'csv_path': csv_path})
-
-
+    if len(results) == 0:
+        return jsonify({'result': 'fail'})
+    # csv로 저장
+    df = pd.DataFrame(results)
+    print(df)
+    now = datetime.now(timezone('Asia/Seoul')).strftime('%Y-%m-%d_%H-%M-%S')
+    csv_path = f'/static/{now}_{keyword}.csv'
+    df.to_csv(f'.{csv_path}')
+    return jsonify({'result': 'success', 'data': results, 'csv_path': csv_path})
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
